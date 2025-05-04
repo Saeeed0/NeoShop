@@ -30,7 +30,7 @@ function Register() {
       )
       .required("Please enter your password"),
     rePassword: Yup.string()
-      .oneOf([Yup.ref("password"), "Passwords do not match"])
+      .oneOf([Yup.ref("password")], "Passwords do not match")
       .required("Please confirm your password"),
   });
 
@@ -59,9 +59,7 @@ function Register() {
               className="form-control"
               name="name"
               id="name"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.name}
+              {...formik.getFieldProps("name")}
             />
             {formik.errors.name && formik.touched.name && (
               <div className="alert  alert-danger" role="alert">
@@ -78,9 +76,7 @@ function Register() {
               className="form-control"
               name="email"
               id="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
+              {...formik.getFieldProps("email")}
             />
             {formik.errors.email && formik.touched.email && (
               <div className="alert alert-danger" role="alert">
@@ -97,9 +93,7 @@ function Register() {
               className="form-control"
               name="phone"
               id="phone"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.phone}
+              {...formik.getFieldProps("phone")}
             />
             {formik.errors.phone && formik.touched.phone && (
               <div className="alert alert-danger" role="alert">
@@ -116,9 +110,7 @@ function Register() {
               className="form-control"
               name="password"
               id="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
+              {...formik.getFieldProps("password")}
             />
             {formik.errors.password && formik.touched.password && (
               <div className="alert alert-danger" role="alert">
@@ -135,9 +127,7 @@ function Register() {
               className="form-control"
               name="rePassword"
               id="rePassword"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.rePassword}
+              {...formik.getFieldProps("rePassword")}
             />
             {formik.errors.rePassword && formik.touched.rePassword && (
               <div className="alert alert-danger" role="alert">
