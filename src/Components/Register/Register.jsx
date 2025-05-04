@@ -1,10 +1,27 @@
 import { useFormik } from "formik";
 import style from "./Register.module.css";
 import * as Yup from "yup";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 function Register() {
-  function submiRegister(values) {
-    console.log(values);
-    console.log(formik);
+  const navigate = useNavigate();
+  const [apiError, setApiError] = useState(null);
+  let [isLoading, setIsLoading] = useState(false);
+
+  async function submiRegister(values) {
+    setIsLoading(true);
+    const { data } = await axios
+      .post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
+      .catch((err) => {
+        setIsLoading(false);
+        setApiError(err.response.data.message);
+      });
+
+    if (data?.message === "success") {
+      setIsLoading(false);
+      navigate("/Login");
+    }
   }
 
   const validationSchema = Yup.object({
@@ -48,6 +65,12 @@ function Register() {
   return (
     <>
       <div className="w-75 mx-auto py-5">
+        {apiError && (
+          <div className="alert alert-danger" role="alert">
+            {apiError}
+          </div>
+        )}
+
         <h2>Register Now</h2>
         <form onSubmit={formik.handleSubmit}>
           <div className=" mb-3">
@@ -135,13 +158,19 @@ function Register() {
               </div>
             )}
           </div>
-          <button
-            type="submit"
-            disabled={!(formik.isValid && formik.dirty)}
-            className="btn bg-main text-light"
-          >
-            Register
-          </button>
+          {
+            <button
+              type="submit"
+              disabled={!(formik.isValid && formik.dirty)}
+              className="btn bg-main text-light"
+            >
+              {isLoading ? (
+                <i className="fa fa-spinner fa-spin"></i>
+              ) : (
+                "Register"
+              )}
+            </button>
+          }
         </form>
       </div>
     </>
