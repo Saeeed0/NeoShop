@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import style from "./Register.module.css";
 import * as Yup from "yup";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { BallTriangle } from "react-loader-spinner";
 function Register() {
   const navigate = useNavigate();
   const [apiError, setApiError] = useState(null);
@@ -165,7 +167,17 @@ function Register() {
               className="btn bg-main text-light"
             >
               {isLoading ? (
-                <i className="fa fa-spinner fa-spin"></i>
+                  (<BallTriangle
+                    height={20}
+                    width={50}
+                    radius={10}
+                    color="#fff"
+                    ariaLabel="ball-triangle-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    />)
+                  
               ) : (
                 "Register"
               )}
