@@ -1,54 +1,39 @@
 import { useFormik } from "formik";
 import style from "./Register.module.css";
+import * as Yup from "yup";
 function Register() {
   function submiRegister(values) {
     console.log(values);
     console.log(formik);
   }
 
-  function validate(values) {
-    const errors = {};
-    const emailPattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    const passwordPattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/;
-    const phonePattern = /^(010|011|012|015)[0-9]{8}$/;
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(3, "Name must be at least 3 characters")
+      .max(15, "Name must not exceed 15 characters")
+      .required("Please enter your name"),
+    email: Yup.string()
+      .email("Email format is not valid (e.g. example@mail.com)")
+      .required("Please enter your email address"),
 
-    if (!values.name) {
-      errors.name = "Please enter your name";
-    } else if (values.name.length < 3) {
-      errors.name = "Name must be at least 3 characters";
-    } else if (values.name.length > 15) {
-      errors.name = "Name must not exceed 15 characters";
-    }
+    phone: Yup.string()
+      .matches(
+        /^(010|011|012|015)[0-9]{8}$/,
+        "Phone number must start with 010, 011, 012, or 015 and be 11 digits"
+      )
+      .required("Please enter your phone number"),
 
-    if (!values.email) {
-      errors.email = "Please enter your email address";
-    } else if (!emailPattern.test(values.email)) {
-      errors.email = "Email format is not valid (e.g. example@mail.com)";
-    }
+    password: Yup.string()
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$/,
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
+      )
+      .required("Please enter your password"),
+    rePassword: Yup.string()
+      .oneOf([Yup.ref("password"), "Passwords do not match"])
+      .required("Please confirm your password"),
+  });
 
-    if (!values.phone) {
-      errors.phone = "Please enter your phone number";
-    } else if (!phonePattern.test(values.phone)) {
-      errors.phone =
-        "Phone number must start with 010, 011, 012, or 015 and be 11 digits";
-    }
-
-    if (!values.password) {
-      errors.password = "Please enter your password";
-    } else if (!passwordPattern.test(values.password)) {
-      errors.password =
-        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character";
-    }
-
-    if (!values.rePassword) {
-      errors.rePassword = "Please confirm your password";
-    } else if (values.rePassword !== values.password) {
-      errors.rePassword = "Passwords do not match";
-    }
-
-    return errors;
-  }
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -57,7 +42,7 @@ function Register() {
       password: "",
       rePassword: "",
     },
-    validate,
+    validationSchema,
     onSubmit: submiRegister,
   });
   return (
@@ -77,7 +62,6 @@ function Register() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
-              required
             />
             {formik.errors.name && formik.touched.name && (
               <div className="alert  alert-danger" role="alert">
@@ -97,7 +81,6 @@ function Register() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              required
             />
             {formik.errors.email && formik.touched.email && (
               <div className="alert alert-danger" role="alert">
@@ -117,7 +100,6 @@ function Register() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.phone}
-              required
             />
             {formik.errors.phone && formik.touched.phone && (
               <div className="alert alert-danger" role="alert">
@@ -137,7 +119,6 @@ function Register() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
-              required
             />
             {formik.errors.password && formik.touched.password && (
               <div className="alert alert-danger" role="alert">
@@ -157,7 +138,6 @@ function Register() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.rePassword}
-              required
             />
             {formik.errors.rePassword && formik.touched.rePassword && (
               <div className="alert alert-danger" role="alert">
