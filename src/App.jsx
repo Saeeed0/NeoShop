@@ -9,6 +9,7 @@ import Brands from "./Components/Brands/Brands";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import NotFound from "./Components/NotFound/NotFound";
+import CounterContextProvider from "./Components/Context/CounterContext";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -50,7 +51,11 @@ function App() {
       ],
     },
   ]);
-  return <RouterProvider router={routers}></RouterProvider>;
+  return (
+    <CounterContextProvider>
+      <RouterProvider router={routers}></RouterProvider>
+    </CounterContextProvider>
+  );
 }
 
 export default App;

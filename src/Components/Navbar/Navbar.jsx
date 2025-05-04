@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import style from "./Navbar.module.css";
 import logoImg from "../../Assets/images/freshcart-logo.svg";
+import { useContext } from "react";
+import { counterContext } from "../Context/CounterContext";
+
 function Navbar() {
+  let { x } = useContext(counterContext);
   return (
     <>
       <nav className="navbar fixed-top navbar-expand-sm navbar-light bg-light">
@@ -24,7 +28,7 @@ function Navbar() {
             <ul className="navbar-nav me-auto mt-2 mt-lg-0">
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  Home
+                  Home {x}
                 </Link>
               </li>
               <li className="nav-item">
