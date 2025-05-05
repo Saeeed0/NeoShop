@@ -8,7 +8,6 @@ function Navbar() {
   const { userToken, setUserToken } = useContext(userContext);
   let { x } = useContext(counterContext);
   const navigate = useNavigate();
-  console.log(userToken);
 
   function Logout() {
     localStorage.removeItem("userToken");

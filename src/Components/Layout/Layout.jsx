@@ -9,7 +9,7 @@ function Layout() {
     <>
       <UserContextProvider >
         <Navbar />
-        <div className="container p-5 m-5">
+        <div className="position-relative p-5 m-5">
           <Outlet></Outlet>
         </div>
         <Footer />
