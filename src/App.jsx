@@ -10,6 +10,7 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import NotFound from "./Components/NotFound/NotFound";
 import CounterContextProvider from "./Components/Context/CounterContext";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -18,23 +19,43 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "Cart",
-          element: <Cart />,
+          element: (
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "Products",
-          element: <Products />,
+          element: (
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "Categories",
-          element: <Categories />,
+          element: (
+            <ProtectedRoute>
+              <Categories />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "Brands",
-          element: <Brands />,
+          element: (
+            <ProtectedRoute>
+              <Brands />
+            </ProtectedRoute>
+          ),
         },
         {
           path: "Login",
