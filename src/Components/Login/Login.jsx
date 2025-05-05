@@ -4,13 +4,15 @@ import * as Yup from "yup";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BallTriangle } from "react-loader-spinner";
+import { userContext } from "../Context/UserContext";
 function Login() {
   const navigate = useNavigate();
   const [apiError, setApiError] = useState(null);
   let [isLoading, setIsLoading] = useState(false);
-
+  const { setUserToken } = useContext(userContext);
+  
   async function submiLogin(values) {
     setIsLoading(true);
     const { data } = await axios
@@ -22,6 +24,8 @@ function Login() {
 
     if (data?.message === "success") {
       setIsLoading(false);
+      localStorage.setItem("userToken", data.token);
+      setUserToken(data.token);
       navigate("/");
     }
   }
