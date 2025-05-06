@@ -5,15 +5,17 @@ import { BallTriangle } from "react-loader-spinner";
 import { useQuery } from "@tanstack/react-query";
 
 function FeaturedProducts() {
+  let [enabledQuery, setEnabledQuery] = useState(false);
   function getFeaturedProducts() {
     return axios.get("https://ecommerce.routemisr.com/api/v1/products");
   }
 
-  let { isLoading, isFetched, isError, data } = useQuery({
+  let { isLoading, isFetched, isError, data, refetch } = useQuery({
     queryKey: ["featuredProducts"],
     queryFn: getFeaturedProducts,
-    // refetchInterval:1000,
+    refetchInterval: 5000,
     staleTime: 1000,
+    // enabled: enabledQuery,
   });
   console.log(data?.data.data);
 
@@ -37,6 +39,15 @@ function FeaturedProducts() {
   return (
     <>
       <h2>Featured Products</h2>
+      <button
+        className="btn text-light bg-main w-100"
+        onClick={() => {
+          refetch();
+          setEnabledQuery(true);
+        }}
+      >
+        Get Products
+      </button>
       {isLoading ? (
         <div
           style={{ transform: "translateY(-145px)" }}
