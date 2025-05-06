@@ -2,25 +2,37 @@ import { useEffect, useState } from "react";
 import style from "./FeaturedProducts.module.css";
 import axios from "axios";
 import { BallTriangle } from "react-loader-spinner";
+import { useQuery } from "@tanstack/react-query";
 
 function FeaturedProducts() {
-  const [products, setProducts] = useState([]);
-  let [isLoading, setIsLoading] = useState(false);
-
-  async function getFeaturedProducts() {
-    setIsLoading(true);
-    const { data } = await axios.get(
-      "https://ecommerce.routemisr.com/api/v1/products"
-    );
-    if (data?.data) {
-      setProducts(data.data);
-      setIsLoading(false);
-    }
+  function getFeaturedProducts() {
+    return axios.get("https://ecommerce.routemisr.com/api/v1/products");
   }
 
-  useEffect(() => {
-    getFeaturedProducts();
-  }, []);
+  let { isLoading, isFetched, isError, data } = useQuery({
+    queryKey: ["featuredProducts"],
+    queryFn: getFeaturedProducts,
+    // refetchInterval:1000,
+    staleTime: 1000,
+  });
+  console.log(data?.data.data);
+
+  // const [products, setProducts] = useState([]);
+  // let [isLoading, setIsLoading] = useState(false);
+  // async function getFeaturedProducts() {
+  //   setIsLoading(true);
+  //   const { data } = await axios.get(
+  //     "https://ecommerce.routemisr.com/api/v1/products"
+  //   );
+  //   if (data?.data) {
+  //     setProducts(data.data);
+  //     setIsLoading(false);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getFeaturedProducts();
+  // }, []);
 
   return (
     <>
@@ -43,7 +55,7 @@ function FeaturedProducts() {
         </div>
       ) : (
         <div className="row">
-          {products.map((product) => (
+          {data?.data.data.map((product) => (
             <div key={product._id} className="col-md-2">
               <div className="product cursor-pointer py-3 px-2">
                 <img
@@ -64,7 +76,7 @@ function FeaturedProducts() {
                     {product.ratingsAverage}
                   </span>
                 </div>
-                <button className="btn btn-main text-white w-100 btn-sm mt-2">
+                <button className="btn bg-main text-white w-100 btn-sm mt-2">
                   add to cart
                 </button>
               </div>
