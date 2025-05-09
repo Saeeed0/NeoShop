@@ -3,6 +3,7 @@ import style from "./FeaturedProducts.module.css";
 import axios from "axios";
 import { BallTriangle } from "react-loader-spinner";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 function FeaturedProducts() {
   let [enabledQuery, setEnabledQuery] = useState(false);
@@ -39,15 +40,7 @@ function FeaturedProducts() {
   return (
     <>
       <h2>Featured Products</h2>
-      <button
-        className="btn text-light bg-main w-100"
-        onClick={() => {
-          refetch();
-          setEnabledQuery(true);
-        }}
-      >
-        Get Products
-      </button>
+
       {isLoading ? (
         <div
           style={{ transform: "translateY(-145px)" }}
@@ -67,7 +60,11 @@ function FeaturedProducts() {
       ) : (
         <div className="row">
           {data?.data.data.map((product) => (
-            <div key={product._id} className="col-md-2">
+            <Link
+              to={`ProductDetails/${product._id}`}
+              key={product._id}
+              className="col-md-2"
+            >
               <div className="product cursor-pointer py-3 px-2">
                 <img
                   className="w-100"
@@ -91,7 +88,7 @@ function FeaturedProducts() {
                   add to cart
                 </button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

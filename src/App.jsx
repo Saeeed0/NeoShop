@@ -11,6 +11,7 @@ import Register from "./Components/Register/Register";
 import NotFound from "./Components/NotFound/NotFound";
 import CounterContextProvider from "./Components/Context/CounterContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -58,6 +59,14 @@ function App() {
           ),
         },
         {
+          path: "ProductDetails/:id",
+          element: (
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
+          ),
+        },
+        {
           path: "Login",
           element: <Login />,
         },
@@ -65,6 +74,7 @@ function App() {
           path: "Register",
           element: <Register />,
         },
+
         {
           path: "*",
           element: <NotFound />,
