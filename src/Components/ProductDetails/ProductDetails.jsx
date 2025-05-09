@@ -30,30 +30,11 @@ function ProductDetails() {
       {data?.data.data && (
         <div className="row  align-items-center py-2">
           <div className="col-md-4">
-            <Swiper
-              modules={[Pagination, Autoplay, EffectFade]}
-              effect="fade"
-              pagination={{ clickable: true }}
-              autoplay={{ delay: 3000 }}
-              loop={true}
-              spaceBetween={30}
-              slidesPerView={1}
-            >
-              {data?.data.data.images.map((image) => (
-                <SwiperSlide className=" m-auto">
-                  <img
-                    className="w-100"
-                    src={image}
-                    alt={data?.data.data.title}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {/* <img
+            <img
               className="w-100"
               src={data?.data.data.imageCover}
               alt={data?.data.data.title}
-            /> */}
+            />
           </div>
           <div className="col-md-8">
             <h2 className="">{data?.data.data.title}</h2>
@@ -72,6 +53,29 @@ function ProductDetails() {
             <button className="btn bg-main text-light w-100 mt-2">
               Add to cart
             </button>
+          </div>
+          <div className="">
+            <div className="col-md-4 mx-auto">
+              <Swiper
+                modules={[Pagination, Autoplay, EffectFade]}
+                effect="fade"
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 3000 }}
+                loop={true}
+                spaceBetween={30}
+                slidesPerView={1}
+              >
+                {data?.data.data.images.map((image) => (
+                  <SwiperSlide className=" m-auto">
+                    <img
+                      className="w-100"
+                      src={image}
+                      alt={data?.data.data.title}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </div>
       )}

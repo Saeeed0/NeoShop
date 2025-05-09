@@ -9,7 +9,6 @@ import Brands from "./Components/Brands/Brands";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import NotFound from "./Components/NotFound/NotFound";
-import CounterContextProvider from "./Components/Context/CounterContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 function App() {
@@ -82,11 +81,7 @@ function App() {
       ],
     },
   ]);
-  return (
-    <CounterContextProvider>
-      <RouterProvider router={routers}></RouterProvider>
-    </CounterContextProvider>
-  );
+  return <RouterProvider router={routers}></RouterProvider>;
 }
 
 export default App;
