@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import style from "./CategorySlider.module.css";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay, EffectFlip, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import axios from "axios";
@@ -14,29 +14,34 @@ function CategorySlider() {
 
   return (
     <>
-      <h2>CategorySlider</h2>
       <div className="">
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
-          loop={true}
-          spaceBetween={0}
-          slidesPerView={5}
-          slidesPerGroup={5}
-          className={`mySwiper`}
-        >
-          {data?.data.data.map((category) => (
-            <SwiperSlide>
-              <img
-                height={200}
-                src={category.image}
-                alt={category.title}
-                className="w-100"
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        {data && (
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            autoplay={{
+              delay: 300,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+            speed={1000}
+            spaceBetween={0}
+            slidesPerView={7}
+            slidesPerGroup={1}
+            className={`${style.customSwiper} cursor-pointer`}
+          >
+            {data?.data.data.map((category) => (
+              <SwiperSlide>
+                <img
+                  height={200}
+                  src={category.image}
+                  alt={category.title}
+                  className="w-100"
+                />
+                <span className="text-main">{category.name}</span>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </>
   );

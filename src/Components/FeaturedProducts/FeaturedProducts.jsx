@@ -48,8 +48,6 @@ function FeaturedProducts() {
 
   return (
     <>
-      <h2>Featured Products</h2>
-
       {isLoading ? (
         <div
           style={{ transform: "translateY(-145px)" }}
