@@ -1,0 +1,15 @@
+:global(.swiper-pagination) {
+  position: relative !important;
+  margin-top: 30px;
+  text-align: center;
+}
+
+:global(.swiper-pagination-bullet) {
+  background-color: #0aad0a;
+  opacity: 0.6;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background-color: #007bff;
+  opacity: 1;
+}
