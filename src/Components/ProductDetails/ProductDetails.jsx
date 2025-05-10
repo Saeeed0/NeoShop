@@ -11,6 +11,7 @@ import { EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import { Helmet } from "react-helmet";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -26,9 +27,12 @@ function ProductDetails() {
 
   return (
     <>
-      {console.log(data?.data.data)}
       {data?.data.data && (
         <div className="row  align-items-center py-2">
+          <Helmet>
+            <title>{data.data.data.title}</title>
+            <meta name="description" content={data.data.data.description} />
+          </Helmet>
           <div className="col-md-4">
             <img
               className="w-100"
@@ -65,8 +69,8 @@ function ProductDetails() {
                 spaceBetween={30}
                 slidesPerView={1}
               >
-                {data?.data.data.images.map((image) => (
-                  <SwiperSlide className=" m-auto">
+                {data?.data.data.images.map((image, index) => (
+                  <SwiperSlide key={index} className=" m-auto">
                     <img
                       className="w-100"
                       src={image}

@@ -6,11 +6,11 @@ import UserContextProvider from "../Context/UserContext";
 import CartContextProvider from "../Context/CartContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Offline } from "react-detect-offline";
 function Layout() {
   return (
     <>
       <ToastContainer />
-
       <UserContextProvider>
         <CartContextProvider>
           <Navbar />
@@ -20,6 +20,12 @@ function Layout() {
           <Footer />
         </CartContextProvider>
       </UserContextProvider>
+
+      <Offline>
+        <div className="network">
+          You're offline right now. Check your connection.
+        </div>
+      </Offline>
     </>
   );
 }

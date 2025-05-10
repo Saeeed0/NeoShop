@@ -58,3 +58,13 @@ a , a:hover{
     background-color: var(--light-color) !important;
 }
 
+.network{
+    position: fixed;
+    left: 30px;
+    bottom: 30px;
+    padding: 20px;
+    color: red;
+    background-color: #f0f3f2;
+    box-shadow: var(--shadow);
+    z-index: 999;
+}
