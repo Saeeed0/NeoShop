@@ -5,7 +5,8 @@ import { BallTriangle } from "react-loader-spinner";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { cartContext } from "../Context/CartContext";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+// import { toast } from "react-toastify";
 
 function FeaturedProducts() {
   let [enabledQuery, setEnabledQuery] = useState(false);
@@ -13,8 +14,9 @@ function FeaturedProducts() {
 
   async function addProductToCart(id) {
     const { data } = await addToCart(id);
-    if (data.status === "success") toast.success(data.message);
-    else toast.error("Failed to add product ❌");
+    if (data.status === "sfuccess") {
+      toast.success(data.message);
+    } else toast.error("Failed to add product ❌");
   }
 
   function getFeaturedProducts() {

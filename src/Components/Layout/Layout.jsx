@@ -5,12 +5,14 @@ import style from "./Layout.module.css";
 import UserContextProvider from "../Context/UserContext";
 import CartContextProvider from "../Context/CartContext";
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { Offline } from "react-detect-offline";
 function Layout() {
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
+      <Toaster />
       <UserContextProvider>
         <CartContextProvider>
           <Navbar />
