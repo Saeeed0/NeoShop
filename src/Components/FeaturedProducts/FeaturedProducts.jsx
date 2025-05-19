@@ -14,9 +14,12 @@ function FeaturedProducts() {
 
   async function addProductToCart(id) {
     const { data } = await addToCart(id);
-    if (data.status === "sfuccess") {
+    if (data?.status === "success") {
       toast.success(data.message);
-    } else toast.error("Failed to add product ❌");
+    } else {
+      toast.error("Failed to add product ❌");
+
+    }
   }
 
   function getFeaturedProducts() {
