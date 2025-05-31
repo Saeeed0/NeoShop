@@ -11,6 +11,7 @@ import Register from "./Components/Register/Register";
 import NotFound from "./Components/NotFound/NotFound";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import Profile from "./Components/Profile/Profile";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -62,6 +63,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <ProductDetails />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "Profile",
+          element: (
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           ),
         },

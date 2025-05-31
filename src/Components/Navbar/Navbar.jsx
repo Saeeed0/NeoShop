@@ -58,6 +58,11 @@ function Navbar() {
                     Brands
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/Profile">
+                    Profile
+                  </Link>
+                </li>
               </ul>
             )}
             <ul className="navbar-nav ms-auto mt-lg-0">
