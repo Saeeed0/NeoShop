@@ -13,6 +13,7 @@ function Home() {
       <MainSlider />
       <CategorySlider />
       <FeaturedProducts></FeaturedProducts>
+      
     </>
   );
 }

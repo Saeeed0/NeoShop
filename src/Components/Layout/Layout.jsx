@@ -8,7 +8,9 @@ import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { Offline } from "react-detect-offline";
+import useNetwork from "../../Hooks/useNetwork";
 function Layout() {
+  const offline = useNetwork();
   return (
     <>
       {/* <ToastContainer /> */}
@@ -23,11 +25,13 @@ function Layout() {
         </CartContextProvider>
       </UserContextProvider>
 
-      <Offline>
+      {/* <Offline>
         <div className="network">
           You're offline right now. Check your connection.
         </div>
-      </Offline>
+      </Offline> */}
+
+      {offline}
     </>
   );
 }
