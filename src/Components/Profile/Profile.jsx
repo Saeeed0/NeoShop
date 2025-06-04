@@ -4,9 +4,10 @@ import { jwtDecode } from "jwt-decode";
 function Profile() {
   const encodedUserProfile = localStorage.getItem("userToken");
   const userData = jwtDecode(encodedUserProfile);
-  console.log(userData);
-  console.log(userData?.name);
-  console.log(userData?.role);
+
+  // console.log(userData);
+  // console.log(userData?.name);
+  // console.log(userData?.role);
 
   return (
     <>

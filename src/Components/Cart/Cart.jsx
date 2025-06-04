@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import style from "./Cart.module.css";
 import { cartContext } from "../Context/CartContext";
 import { BallTriangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 function Cart() {
   const {
     getLoggedUserCart,
@@ -114,18 +115,27 @@ function Cart() {
             >
               Clear All
             </button>
-            <button className="btn ms-3 btn-success">Check Out</button>
+            <Link
+              to="/Address"
+              className="btn ms-3 text-light d-flex align-items-center btn-success"
+            >
+              Check Out
+            </Link>
+
             <p className="ms-auto">
-              Total Price{" "}
+              Total Price
               <span className="text-danger fw-bold">
-                {cartDetails?.data.totalCartPrice}{" "}
-              </span>{" "}
+                {cartDetails?.data.totalCartPrice}
+              </span>
               EGP
             </p>
           </div>
         </div>
       ) : (
-        <div  style={{ transform: "translateY(-145px)" }} class="vh-100 d-flex justify-content-center align-items-center">
+        <div
+          style={{ transform: "translateY(-145px)" }}
+          className="vh-100 d-flex justify-content-center align-items-center"
+        >
           <BallTriangle
             height={80}
             width={150}

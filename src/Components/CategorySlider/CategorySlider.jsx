@@ -11,7 +11,6 @@ function CategorySlider() {
     return await axios.get("https://ecommerce.routemisr.com/api/v1/categories");
   }
   let { data } = useQuery({ queryKey: ["categories"], queryFn: getCategories });
-
   return (
     <>
       <div className="">
@@ -30,7 +29,7 @@ function CategorySlider() {
             className={`${style.customSwiper} cursor-pointer`}
           >
             {data?.data.data.map((category) => (
-              <SwiperSlide>
+              <SwiperSlide key={category._id}>
                 <img
                   height={200}
                   src={category.image}

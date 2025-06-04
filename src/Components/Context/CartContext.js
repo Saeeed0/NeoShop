@@ -1,9 +1,10 @@
 import axios from "axios";
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const cartContext = createContext();
 
 function CartContextProvider({ children }) {
+  const [cartId, setCartId] = useState(null);
   const headers = {
     token: localStorage.getItem("userToken"),
   };
@@ -28,8 +29,8 @@ function CartContextProvider({ children }) {
     });
   }
 
-  async function updateProductQuantity(productId, count) {
-    return await axios
+  function updateProductQuantity(productId, count) {
+    return axios
       .put(
         `https://ecommerce.routemisr.com/api/v1/cart/${productId}`,
         { count },
@@ -39,15 +40,15 @@ function CartContextProvider({ children }) {
       .catch((error) => error);
   }
 
-  async function clearUserCart() {
-    return await axios
+  function clearUserCart() {
+    return axios
       .delete(`https://ecommerce.routemisr.com/api/v1/cart/`, { headers })
       .then((response) => response)
       .catch((error) => error);
   }
 
-  async function removeCartItem(productId) {
-    return await axios
+  function removeCartItem(productId) {
+    return axios
       .delete(`https://ecommerce.routemisr.com/api/v1/cart/${productId}`, {
         headers,
       })
@@ -55,6 +56,24 @@ function CartContextProvider({ children }) {
       .catch((error) => error);
   }
 
+  function onlinePayment(url, cartId, values) {
+    return axios
+      .post(
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${url}`,
+        { shippingAddress: values },
+        { headers }
+      )
+      .then((response) => response)
+      .catch((error) => error);
+  }
+
+  async function getCartId() {
+    const { data } = await getLoggedUserCart();
+    setCartId(data?.cartId);
+  }
+  useEffect(() => {
+    getCartId();
+  }, []);
   return (
     <cartContext.Provider
       value={{
@@ -63,6 +82,8 @@ function CartContextProvider({ children }) {
         removeCartItem,
         clearUserCart,
         updateProductQuantity,
+        onlinePayment,
+        cartId,
       }}
     >
       {children}

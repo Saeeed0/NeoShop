@@ -12,6 +12,8 @@ import NotFound from "./Components/NotFound/NotFound";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import Profile from "./Components/Profile/Profile";
+import Address from "./Components/Address/Address";
+import Orders from "./Components/Orders/Orders";
 function App() {
   const routers = createBrowserRouter([
     {
@@ -71,6 +73,22 @@ function App() {
           element: (
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "Address",
+          element: (
+            <ProtectedRoute>
+              <Address />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/AllOrders",
+          element: (
+            <ProtectedRoute>
+              <Orders />
             </ProtectedRoute>
           ),
         },
