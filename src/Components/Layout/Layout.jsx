@@ -25,13 +25,13 @@ function Layout() {
         </CartContextProvider>
       </UserContextProvider>
 
-      {/* <Offline>
+      <Offline>
         <div className="network">
           You're offline right now. Check your connection.
         </div>
-      </Offline> */}
+      </Offline>
 
-      {offline}
+      {/* {offline} */}
     </>
   );
 }
